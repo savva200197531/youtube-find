@@ -1,13 +1,17 @@
 <template>
   <div class="favorites-video">
-<!--    <div v-for="(favorite, key) in favorites" :key="key">-->
+    <!--    <div v-for="(favorite, key) in favorites" :key="key">-->
     <h1>Избранное</h1>
-      <a-list bordered :data-source="getFavoritesArr">
-        <a-list-item @click="findThis(favorite)" class="favorite" slot="renderItem" slot-scope="favorite">
-          {{ favorite.name }}
-        </a-list-item>
-      </a-list>
-<!--    </div>-->
+    <a-list bordered :data-source="getFavoritesArr">
+      <a-list-item class="favorite" slot="renderItem" slot-scope="favorite">
+        <div @click="findThis(favorite)" class="favorite-name">{{ favorite.name }}</div>
+        <div class="favorite-controls">
+          <span @click="changeFavorite(favorite)" class="change">Изменить</span>
+          <span @click="deleteFavorite(favorite)" class="delete">Удалить</span>
+        </div>
+      </a-list-item>
+    </a-list>
+    <!--    </div>-->
   </div>
 </template>
 
@@ -19,16 +23,19 @@ export default {
   name: "favoritesVideo",
   computed: {
     ...mapState('videoStorage', [
-        'favorites'
+      'favorites'
+    ]),
+    ...mapState('authStorage', [
+      'user'
     ]),
     ...mapGetters('videoStorage', [
-        'getFavoritesArr'
+      'getFavoritesArr'
     ])
   },
   methods: {
     ...mapActions('videoStorage', [
-        'getVideos',
-        // 'initFavoritesState'
+      'getVideos',
+      'deleteFavoriteFromDB'
     ]),
     findThis(favorite) {
       this.getVideos({
@@ -37,6 +44,16 @@ export default {
         request: favorite.request
       });
       router.push('/');
+    },
+    changeFavorite(favorite) {
+      console.log(favorite);
+    },
+    deleteFavorite(favorite) {
+      console.log(favorite);
+      this.deleteFavoriteFromDB({
+        userId: this.user.id,
+        id: favorite.id
+      })
     },
   },
   mounted() {
@@ -53,10 +70,31 @@ export default {
 
 .favorite {
   cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+}
+
+.favorite-name {
+  width: 80%;
 
   &:hover {
     transition: .3s ease;
     opacity: 0.8;
   }
 }
+
+.favorite-controls {
+  width: 20%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.change {
+  color: #1390E5;
+}
+
+.delete {
+  color: #FF0000;
+}
+
 </style>

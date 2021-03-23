@@ -60,7 +60,9 @@ const actions = {
       id: payload.id
     }))
 
-    axios.post('http://localhost:4000/users/new', payload);
+    axios.post('http://localhost:4000/users/new', payload).catch(err => {
+      console.error(err);
+    });
   },
 
   initUsersState({ commit, dispatch }) {
@@ -75,12 +77,10 @@ const actions = {
         dispatch('updateUser', user);
         commit('setUser', user);
       }
+    }).catch(err => {
+      console.error(err);
     });
   },
-
-  getVideosFromApi() {
-
-  }
 };
 
 const getters = {};

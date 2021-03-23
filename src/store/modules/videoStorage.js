@@ -186,6 +186,8 @@ const actions = {
     axios.get(url).then(res => {
       dispatch('getVideoParameters', res.data);
       commit('setTotalResult', res.data.pageInfo.totalResults);
+    }).catch(err => {
+      console.error(err);
     });
   },
 
@@ -195,7 +197,9 @@ const actions = {
       return axios.get('https://youtube.googleapis.com/youtube/v3/videos'
         + '?part=snippet%2CcontentDetails%2Cstatistics'
         + `&id=${item.id.videoId}`
-        + youTubeKeyStr);
+        + youTubeKeyStr).catch(err => {
+        console.error(err)
+      });
     });
     axios.all(requests).then(res => {
       const formedVideos = res.map(video => {
@@ -209,6 +213,8 @@ const actions = {
       });
 
       commit('setResultVideos', formedVideos);
+    }).catch(err => {
+      console.error(err);
     });
   },
 
@@ -220,7 +226,7 @@ const actions = {
     });
   },
 
-  closeForm({commit}) {
+  closeForm({ commit }) {
     document.body.classList.remove('hiddenOverflow');
     commit('changeFormShow', {
       show: false,
@@ -229,7 +235,7 @@ const actions = {
   },
 
   // eslint-disable-next-line no-empty-pattern
-  submitFavoriteForm({dispatch}, payload) {
+  submitFavoriteForm({ dispatch }, payload) {
     let id = uniqId();
 
     Object.values(state.favorites).forEach(value => {
@@ -241,8 +247,21 @@ const actions = {
     axios.post('http://localhost:4000/favorites/new', {
       ...payload,
       id
+    }).finally(() => {
+      dispatch('initFavoritesState');
+    }).catch(err => {
+      console.error(err);
     });
-    dispatch('initFavoritesState');
+  },
+
+  // eslint-disable-next-line no-unused-vars
+  deleteFavoriteFromDB({ dispatch }, payload) {
+    console.log(payload)
+    axios.post('http://localhost:4000/favorites/remove', payload).finally(() => {
+      dispatch('initFavoritesState');
+    }).catch(err => {
+      console.error(err);
+    });
   },
 
   // eslint-disable-next-line no-empty-pattern
@@ -250,6 +269,8 @@ const actions = {
     const userId = JSON.parse(localStorage.getItem('user')).id
     axios.get('http://localhost:4000/favorites').then(res => {
       commit('setFavorites', res.data[userId] || []);
+    }).catch(err => {
+      console.error(err);
     });
   }
 };
