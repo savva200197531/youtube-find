@@ -31,7 +31,6 @@ export default {
         // 'initFavoritesState'
     ]),
     findThis(favorite) {
-      console.log(favorite);
       this.getVideos({
         max: favorite.max,
         order: favorite.order,

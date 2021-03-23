@@ -5,8 +5,6 @@ import uniqId from 'uniqid';
 
 Vue.use(Vuex);
 
-// AIzaSyAOzGAf90xBy92MxyJYxDZ0q47QiRZs9E0
-
 const youTubeKeyStr = `&key=${process.env.VUE_APP_YOUTUBE_API_KEY}`;
 
 const state = {
@@ -156,25 +154,27 @@ const state = {
 };
 
 const mutations = {
-  setResultInfo(state, payload) {
-    state.result.request = payload.request;
-    state.result.totalResults = payload.totalResults;
+  setTotalResult(state, payload) {
+    Vue.set(state.result, 'totalResults', payload);
+  },
+  setResultRequest(state, payload) {
+    Vue.set(state.result, 'request', payload);
   },
   setResultVideos(state, payload) {
-    state.result.videos = payload;
+    Vue.set(state.result, 'videos', payload);
   },
   changeFormShow(state, payload) {
     state.showForm = payload;
   },
   setFavorites(state, payload) {
     Vue.set(state, 'favorites', payload);
-    console.log(state.favorites);
   }
 };
 
 const actions = {
   // eslint-disable-next-line no-empty-pattern
   getVideos({ commit, dispatch }, payload) {
+    commit('setResultRequest', payload.request);
     // console.log(payload)
     const url = 'https://youtube.googleapis.com/youtube/v3/search'
       + `?maxResults=${payload.max || '12'}`
@@ -182,14 +182,10 @@ const actions = {
       + `&q=${payload.request}`
       + '&type=video'
       + youTubeKeyStr;
-    // const url = `?maxResults=25&q=surfing&type=video&key=${process.env.VUE_APP_YOUTUBE_API_KEY}`
 
     axios.get(url).then(res => {
       dispatch('getVideoParameters', res.data);
-      commit('setResultInfo', {
-        request: payload.request,
-        totalResults: res.data.pageInfo.totalResults
-      })
+      commit('setTotalResult', res.data.pageInfo.totalResults);
     });
   },
 
@@ -252,9 +248,7 @@ const actions = {
   // eslint-disable-next-line no-empty-pattern
   initFavoritesState({ commit }) {
     const userId = JSON.parse(localStorage.getItem('user')).id
-    console.log(userId)
     axios.get('http://localhost:4000/favorites').then(res => {
-      console.log(res.data[userId]);
       commit('setFavorites', res.data[userId] || []);
     });
   }
@@ -265,9 +259,7 @@ const getters = {
     return state.result.request;
   },
   getFavoritesArr: state => {
-    let out = Object.keys(state.favorites).map(key => state.favorites[key]);
-    console.log(out);
-    return out;
+    return Object.keys(state.favorites).map(key => state.favorites[key]);
   },
 };
 

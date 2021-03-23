@@ -11,7 +11,6 @@ export default {
   computed: {},
   methods: {},
   mounted() {
-    console.log('1')
     if (!JSON.parse(localStorage.getItem('user')) && router.currentRoute.path !== '/auth') {
       router.push('/auth');
     }

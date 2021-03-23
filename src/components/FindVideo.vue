@@ -11,12 +11,12 @@
           v-model="request"
       >
 
-        <a-popover class="favorites-popover" placement="bottom" slot="suffix" v-if="favorite">
+        <a-popover class="favorites-popover" placement="bottom" slot="suffix" v-if="getFavoritesArr.some(favorite => favorite.request === request)">
           <template slot="content">
             <span>Поиск сохранён в разделе «Избранное»</span>
             <router-link to="/favorites">Перейти в избранное</router-link>
           </template>
-          <a-icon type="heart" class="search-suffix-active search-suffix"/>
+          <a-icon theme="twoTone" two-tone-color="#eb2f96" heigth="100px" width="100px" type="heart" class="search-suffix-active search-suffix"/>
         </a-popover>
 
         <a-icon @click="!!request.trim().length && openForm(request)" type="heart" slot="suffix" v-else class="search-suffix"/>
@@ -86,7 +86,8 @@ export default {
         'result'
     ]),
     ...mapGetters('videoStorage', [
-       'getRequest'
+       'getRequest',
+        'getFavoritesArr'
     ]),
     newRequest: {
       get() {
@@ -120,10 +121,12 @@ export default {
     }
   },
   mounted() {
-    // console.log(this.result.request)
     if (this.newRequest.length) {
       this.request = this.newRequest;
     }
+  },
+  destroyed() {
+    this.request = '';
   }
 }
 </script>
@@ -159,7 +162,14 @@ export default {
 
 .search-suffix {
   cursor: pointer;
+
+  &.anticon {
+    margin-right: 20px;
+    font-size: 24px;
+  }
 }
+
+.search-suffix-active {}
 
 .favorites-popover {
   max-width: 220px;
