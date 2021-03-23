@@ -27,7 +27,8 @@ export default {
   },
   methods: {
     ...mapActions('videoStorage', [
-        'getVideos'
+        'getVideos',
+        // 'initFavoritesState'
     ]),
     findThis(favorite) {
       console.log(favorite);
@@ -37,7 +38,10 @@ export default {
         request: favorite.request
       });
       router.push('/');
-    }
+    },
+  },
+  mounted() {
+    // this.initFavoritesState();
   }
 }
 </script>

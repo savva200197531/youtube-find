@@ -4,17 +4,29 @@
     <a-layout-content>
       <router-view></router-view>
     </a-layout-content>
-<!--    <a-layout-footer>Footer</a-layout-footer>-->
   </div>
 </template>
 
 <script>
 import HeaderComponent from '@/components/HeaderComponent';
+import { mapActions } from 'vuex';
 
 export default {
   name: "mainLayout",
   components: {
     HeaderComponent
+  },
+  methods: {
+    ...mapActions('authStorage', [
+      'initUsersState'
+    ]),
+    ...mapActions('videoStorage', [
+      'initFavoritesState'
+    ]),
+  },
+  mounted() {
+    this.initUsersState();
+    this.initFavoritesState();
   }
 }
 </script>

@@ -249,10 +249,13 @@ const actions = {
     dispatch('initFavoritesState');
   },
 
+  // eslint-disable-next-line no-empty-pattern
   initFavoritesState({ commit }) {
+    const userId = JSON.parse(localStorage.getItem('user')).id
+    console.log(userId)
     axios.get('http://localhost:4000/favorites').then(res => {
-      console.log(res);
-      commit('setFavorites', res.data);
+      console.log(res.data[userId]);
+      commit('setFavorites', res.data[userId] || []);
     });
   }
 };
@@ -265,7 +268,7 @@ const getters = {
     let out = Object.keys(state.favorites).map(key => state.favorites[key]);
     console.log(out);
     return out;
-  }
+  },
 };
 
 export default {

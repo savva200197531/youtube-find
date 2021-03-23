@@ -3,29 +3,15 @@
 </template>
 
 <script>
-import { mapActions, mapState } from 'vuex';
 import router from '@/router/router';
 
 export default {
   name: 'App',
   components: {},
-  computed: {
-    ...mapState('authStorage', [
-      'user'
-    ])
-  },
-  methods: {
-    ...mapActions('authStorage', [
-      'initUsersState'
-    ]),
-    ...mapActions('videoStorage', [
-      'initFavoritesState'
-    ]),
-  },
+  computed: {},
+  methods: {},
   mounted() {
-    this.initUsersState();
-    this.initFavoritesState();
-    console.log(JSON.parse(localStorage.getItem('user')))
+    console.log('1')
     if (!JSON.parse(localStorage.getItem('user')) && router.currentRoute.path !== '/auth') {
       router.push('/auth');
     }

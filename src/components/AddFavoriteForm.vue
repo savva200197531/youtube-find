@@ -118,6 +118,9 @@ export default {
   computed: {
     ...mapState('videoStorage', [
       'showForm',
+    ]),
+    ...mapState('authStorage', [
+        'user'
     ])
   },
   beforeCreate() {
@@ -132,7 +135,7 @@ export default {
       e.preventDefault();
       this.form.validateFields((err, values) => {
         if (!err) {
-          this.submitFavoriteForm(values);
+          this.submitFavoriteForm({ ...values, userId: this.user.id });
           this.closeForm();
         }
       });
