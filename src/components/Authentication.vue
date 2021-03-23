@@ -15,7 +15,7 @@
         <a-input
             v-decorator="[
           'login',
-          { initialValue: '12345678', rules: this.rules.loginRules },
+          { initialValue: '12345678', rules: rules.loginRules },
         ]"
             placeholder="Логин"
         >
@@ -25,7 +25,7 @@
         <a-input-password
             v-decorator="[
           'password',
-          { initialValue: '12345678', rules: this.rules.passwordRules },
+          { initialValue: '12345678', rules: rules.passwordRules },
         ]"
             type="password"
             placeholder="Пароль"

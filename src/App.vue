@@ -17,10 +17,14 @@ export default {
   methods: {
     ...mapActions('authStorage', [
       'initUsersState'
-    ])
+    ]),
+    ...mapActions('videoStorage', [
+      'initFavoritesState'
+    ]),
   },
   mounted() {
     this.initUsersState();
+    this.initFavoritesState();
     console.log(JSON.parse(localStorage.getItem('user')))
     if (!JSON.parse(localStorage.getItem('user')) && router.currentRoute.path !== '/auth') {
       router.push('/auth');
@@ -32,6 +36,8 @@ export default {
 }
 </script>
 
-<style>
-
+<style lang="scss">
+.hiddenOverflow {
+  overflow: hidden;
+}
 </style>
