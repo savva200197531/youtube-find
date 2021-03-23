@@ -10,141 +10,141 @@ const youTubeKeyStr = `&key=${process.env.VUE_APP_YOUTUBE_API_KEY}`;
 const state = {
   result: {
     videos: [
-      {
-        "preview": {
-          "url": "https://i.ytimg.com/vi/V3pXO0IGMYQ/mqdefault.jpg",
-          "width": 320,
-          "height": 180
-        },
-        "title": "12 Способов Пронести ЕДУ в БОЛЬНИЦУ !",
-        "views": "7099629",
-        "channel": "A4",
-        "id": "V3pXO0IGMYQ"
-      },
-      {
-        "preview": {
-          "url": "https://i.ytimg.com/vi/iXQpStWQVTI/mqdefault.jpg",
-          "width": 320,
-          "height": 180
-        },
-        "title": "ЭКСТРЕМАЛЬНОЕ ОГРАБЛЕНИЕ ВЛАДА А4 !",
-        "views": "10170416",
-        "channel": "A4",
-        "id": "iXQpStWQVTI"
-      },
-      {
-        "preview": {
-          "url": "https://i.ytimg.com/vi/DH-LzXQR0WA/mqdefault.jpg",
-          "width": 320,
-          "height": 180
-        },
-        "title": "ЭКСТРЕМАЛЬНОЕ ОГРАБЛЕНИЕ ВЛАДА А4 ! ** а4 новые серии **",
-        "views": "3001504",
-        "channel": "Вильям Бруно",
-        "id": "DH-LzXQR0WA"
-      },
-      {
-        "preview": {
-          "url": "https://i.ytimg.com/vi/4bonETmPRUY/mqdefault_live.jpg",
-          "width": 320,
-          "height": 180
-        },
-        "title": "ВЛАД А4 ИГРАЕТ В БРАВЛ СТАРС 24 ЧАСА а4 песня клоун кидс пол это лава прятки амонгас заработок денег",
-        "views": "2270",
-        "channel": "EndyWorld",
-        "id": "4bonETmPRUY"
-      },
-      {
-        "preview": {
-          "url": "https://i.ytimg.com/vi/GP_4KttcofQ/mqdefault.jpg",
-          "width": 320,
-          "height": 180
-        },
-        "title": "ВЛАД А4 - МИЛЛИОНЕР, КОТОРЫЙ УКРАЛ ВООБЩЕ ВСЁ / БОЛЬШОЕ РАССЛЕДОВАНИЕ",
-        "views": "2224304",
-        "channel": "SOBOLEV",
-        "id": "GP_4KttcofQ"
-      },
-      {
-        "preview": {
-          "url": "https://i.ytimg.com/vi/o3DAiRuFhXQ/mqdefault.jpg",
-          "width": 320,
-          "height": 180
-        },
-        "title": "24 Часа в АВТОСЕРВИСЕ Челлендж !",
-        "views": "12102900",
-        "channel": "A4",
-        "id": "o3DAiRuFhXQ"
-      },
-      {
-        "preview": {
-          "url": "https://i.ytimg.com/vi/D5wEheu9uA0/mqdefault.jpg",
-          "width": 320,
-          "height": 180
-        },
-        "title": "КТО ПОСЛЕДНИЙ ПОКИНЕТ БИОТУАЛЕТ ЧЕЛЛЕНДЖ !",
-        "views": "11055663",
-        "channel": "A4",
-        "id": "D5wEheu9uA0"
-      },
-      {
-        "preview": {
-          "url": "https://i.ytimg.com/vi/joXFFy4gsH0/mqdefault.jpg",
-          "width": 320,
-          "height": 180
-        },
-        "title": "Прятки в ПРЕДМЕТАХ в Реальной Жизни ! - Челлендж",
-        "views": "11102545",
-        "channel": "A4",
-        "id": "joXFFy4gsH0"
-      },
-      {
-        "preview": {
-          "url": "https://i.ytimg.com/vi/7DEsmRZbHcg/mqdefault.jpg",
-          "width": 320,
-          "height": 180
-        },
-        "title": "Нас Заперли в ОГРОМНОМ ШАРЕ...",
-        "views": "13422169",
-        "channel": "A4",
-        "id": "7DEsmRZbHcg"
-      },
-      {
-        "preview": {
-          "url": "https://i.ytimg.com/vi/DIy6rm6UzA4/mqdefault.jpg",
-          "width": 320,
-          "height": 180
-        },
-        "title": "Кто Последний Покинет КАРТОННЫЙ ДОМ Челлендж !",
-        "views": "14655854",
-        "channel": "A4",
-        "id": "DIy6rm6UzA4"
-      },
-      {
-        "preview": {
-          "url": "https://i.ytimg.com/vi/gxac8XGb8QY/mqdefault.jpg",
-          "width": 320,
-          "height": 180
-        },
-        "title": "Кто Сделает Лучший ТИКТОК Получит 1000$ - Челлендж",
-        "views": "14060985",
-        "channel": "A4",
-        "id": "gxac8XGb8QY"
-      },
-      {
-        "preview": {
-          "url": "https://i.ytimg.com/vi/kuNP3Z1f07A/mqdefault.jpg",
-          "width": 320,
-          "height": 180
-        },
-        "title": "Экстремальные КАМУФЛЯЖНЫЕ Прятки ! **2 Часть**",
-        "views": "15880067",
-        "channel": "A4",
-        "id": "kuNP3Z1f07A"
-      }
+      // {
+      //   "preview": {
+      //     "url": "https://i.ytimg.com/vi/V3pXO0IGMYQ/mqdefault.jpg",
+      //     "width": 320,
+      //     "height": 180
+      //   },
+      //   "title": "12 Способов Пронести ЕДУ в БОЛЬНИЦУ !",
+      //   "views": "7099629",
+      //   "channel": "A4",
+      //   "id": "V3pXO0IGMYQ"
+      // },
+      // {
+      //   "preview": {
+      //     "url": "https://i.ytimg.com/vi/iXQpStWQVTI/mqdefault.jpg",
+      //     "width": 320,
+      //     "height": 180
+      //   },
+      //   "title": "ЭКСТРЕМАЛЬНОЕ ОГРАБЛЕНИЕ ВЛАДА А4 !",
+      //   "views": "10170416",
+      //   "channel": "A4",
+      //   "id": "iXQpStWQVTI"
+      // },
+      // {
+      //   "preview": {
+      //     "url": "https://i.ytimg.com/vi/DH-LzXQR0WA/mqdefault.jpg",
+      //     "width": 320,
+      //     "height": 180
+      //   },
+      //   "title": "ЭКСТРЕМАЛЬНОЕ ОГРАБЛЕНИЕ ВЛАДА А4 ! ** а4 новые серии **",
+      //   "views": "3001504",
+      //   "channel": "Вильям Бруно",
+      //   "id": "DH-LzXQR0WA"
+      // },
+      // {
+      //   "preview": {
+      //     "url": "https://i.ytimg.com/vi/4bonETmPRUY/mqdefault_live.jpg",
+      //     "width": 320,
+      //     "height": 180
+      //   },
+      //   "title": "ВЛАД А4 ИГРАЕТ В БРАВЛ СТАРС 24 ЧАСА а4 песня клоун кидс пол это лава прятки амонгас заработок денег",
+      //   "views": "2270",
+      //   "channel": "EndyWorld",
+      //   "id": "4bonETmPRUY"
+      // },
+      // {
+      //   "preview": {
+      //     "url": "https://i.ytimg.com/vi/GP_4KttcofQ/mqdefault.jpg",
+      //     "width": 320,
+      //     "height": 180
+      //   },
+      //   "title": "ВЛАД А4 - МИЛЛИОНЕР, КОТОРЫЙ УКРАЛ ВООБЩЕ ВСЁ / БОЛЬШОЕ РАССЛЕДОВАНИЕ",
+      //   "views": "2224304",
+      //   "channel": "SOBOLEV",
+      //   "id": "GP_4KttcofQ"
+      // },
+      // {
+      //   "preview": {
+      //     "url": "https://i.ytimg.com/vi/o3DAiRuFhXQ/mqdefault.jpg",
+      //     "width": 320,
+      //     "height": 180
+      //   },
+      //   "title": "24 Часа в АВТОСЕРВИСЕ Челлендж !",
+      //   "views": "12102900",
+      //   "channel": "A4",
+      //   "id": "o3DAiRuFhXQ"
+      // },
+      // {
+      //   "preview": {
+      //     "url": "https://i.ytimg.com/vi/D5wEheu9uA0/mqdefault.jpg",
+      //     "width": 320,
+      //     "height": 180
+      //   },
+      //   "title": "КТО ПОСЛЕДНИЙ ПОКИНЕТ БИОТУАЛЕТ ЧЕЛЛЕНДЖ !",
+      //   "views": "11055663",
+      //   "channel": "A4",
+      //   "id": "D5wEheu9uA0"
+      // },
+      // {
+      //   "preview": {
+      //     "url": "https://i.ytimg.com/vi/joXFFy4gsH0/mqdefault.jpg",
+      //     "width": 320,
+      //     "height": 180
+      //   },
+      //   "title": "Прятки в ПРЕДМЕТАХ в Реальной Жизни ! - Челлендж",
+      //   "views": "11102545",
+      //   "channel": "A4",
+      //   "id": "joXFFy4gsH0"
+      // },
+      // {
+      //   "preview": {
+      //     "url": "https://i.ytimg.com/vi/7DEsmRZbHcg/mqdefault.jpg",
+      //     "width": 320,
+      //     "height": 180
+      //   },
+      //   "title": "Нас Заперли в ОГРОМНОМ ШАРЕ...",
+      //   "views": "13422169",
+      //   "channel": "A4",
+      //   "id": "7DEsmRZbHcg"
+      // },
+      // {
+      //   "preview": {
+      //     "url": "https://i.ytimg.com/vi/DIy6rm6UzA4/mqdefault.jpg",
+      //     "width": 320,
+      //     "height": 180
+      //   },
+      //   "title": "Кто Последний Покинет КАРТОННЫЙ ДОМ Челлендж !",
+      //   "views": "14655854",
+      //   "channel": "A4",
+      //   "id": "DIy6rm6UzA4"
+      // },
+      // {
+      //   "preview": {
+      //     "url": "https://i.ytimg.com/vi/gxac8XGb8QY/mqdefault.jpg",
+      //     "width": 320,
+      //     "height": 180
+      //   },
+      //   "title": "Кто Сделает Лучший ТИКТОК Получит 1000$ - Челлендж",
+      //   "views": "14060985",
+      //   "channel": "A4",
+      //   "id": "gxac8XGb8QY"
+      // },
+      // {
+      //   "preview": {
+      //     "url": "https://i.ytimg.com/vi/kuNP3Z1f07A/mqdefault.jpg",
+      //     "width": 320,
+      //     "height": 180
+      //   },
+      //   "title": "Экстремальные КАМУФЛЯЖНЫЕ Прятки ! **2 Часть**",
+      //   "views": "15880067",
+      //   "channel": "A4",
+      //   "id": "kuNP3Z1f07A"
+      // }
     ],
-    request: 'Влад а4',
-    totalResults: 10000
+    request: '',
+    totalResults: ''
   },
   showForm: {
     show: false,
@@ -241,7 +241,6 @@ const actions = {
     Object.values(state.favorites).forEach(value => {
       if (value.request === payload.request || value.id === payload.favoriteId) {
         id = value.id
-        console.log('yep')
       }
     });
 

@@ -45,7 +45,6 @@ export default {
       router.push('/');
     },
     changeFavorite(favorite) {
-      console.log(favorite);
       this.openForm({
         request: favorite.request,
         redact: true,

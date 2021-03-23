@@ -138,7 +138,6 @@ export default {
       e.preventDefault();
       this.form.validateFields((err, values) => {
         if (!err) {
-          console.log(this.showForm)
           this.submitFavoriteForm({ ...values, userId: this.user.id, favoriteId: this.getCurrentFavorite.id });
           this.closeForm();
         }
