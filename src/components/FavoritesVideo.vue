@@ -1,6 +1,5 @@
 <template>
   <div class="favorites-video">
-    <!--    <div v-for="(favorite, key) in favorites" :key="key">-->
     <h1>Избранное</h1>
     <a-list bordered :data-source="getFavoritesArr">
       <a-list-item class="favorite" slot="renderItem" slot-scope="favorite">
@@ -11,7 +10,6 @@
         </div>
       </a-list-item>
     </a-list>
-    <!--    </div>-->
   </div>
 </template>
 
@@ -35,7 +33,8 @@ export default {
   methods: {
     ...mapActions('videoStorage', [
       'getVideos',
-      'deleteFavoriteFromDB'
+      'deleteFavoriteFromDB',
+        'openForm'
     ]),
     findThis(favorite) {
       this.getVideos({
@@ -47,6 +46,11 @@ export default {
     },
     changeFavorite(favorite) {
       console.log(favorite);
+      this.openForm({
+        request: favorite.request,
+        redact: true,
+        currentFavorite: favorite
+      });
     },
     deleteFavorite(favorite) {
       console.log(favorite);

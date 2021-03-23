@@ -67,6 +67,8 @@ export default {
     ]),
     handleSubmit() {
       this.form.validateFields((err, values) => {
+        console.log(values)
+        Object.values(values).forEach(value => value.trim());
         if (!err) {
           this.userLogin(values);
         }

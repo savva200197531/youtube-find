@@ -222,7 +222,7 @@ const actions = {
     document.body.classList.add('hiddenOverflow')
     commit('changeFormShow', {
       show: true,
-      request: payload
+      ...payload
     });
   },
 
@@ -230,17 +230,18 @@ const actions = {
     document.body.classList.remove('hiddenOverflow');
     commit('changeFormShow', {
       show: false,
-      request: ''
+      request: '',
+      redact: false,
     });
   },
 
-  // eslint-disable-next-line no-empty-pattern
   submitFavoriteForm({ dispatch }, payload) {
     let id = uniqId();
 
     Object.values(state.favorites).forEach(value => {
-      if (value.request === payload.request) {
+      if (value.request === payload.request || value.id === payload.favoriteId) {
         id = value.id
+        console.log('yep')
       }
     });
 
@@ -256,7 +257,6 @@ const actions = {
 
   // eslint-disable-next-line no-unused-vars
   deleteFavoriteFromDB({ dispatch }, payload) {
-    console.log(payload)
     axios.post('http://localhost:4000/favorites/remove', payload).finally(() => {
       dispatch('initFavoritesState');
     }).catch(err => {
@@ -282,6 +282,9 @@ const getters = {
   getFavoritesArr: state => {
     return Object.keys(state.favorites).map(key => state.favorites[key]);
   },
+  getCurrentFavorite: state => {
+    return state.showForm.currentFavorite ? state.showForm.currentFavorite : ''
+  }
 };
 
 export default {

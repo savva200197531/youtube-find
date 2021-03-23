@@ -11,30 +11,34 @@
           v-model="request"
       >
 
-        <a-popover class="favorites-popover" placement="bottom" slot="suffix" v-if="getFavoritesArr.some(favorite => favorite.request === request)">
+        <a-popover class="favorites-popover" placement="bottom" slot="suffix"
+                   v-if="getFavoritesArr.some(favorite => favorite.request === request)">
           <template slot="content">
             <span>Поиск сохранён в разделе «Избранное»</span>
             <router-link to="/favorites">Перейти в избранное</router-link>
           </template>
-          <a-icon theme="twoTone" two-tone-color="#eb2f96" heigth="100px" width="100px" type="heart" class="search-suffix-active search-suffix"/>
+          <a-icon theme="twoTone" two-tone-color="#eb2f96" heigth="100px" width="100px" type="heart"
+                  class="search-suffix-active search-suffix"/>
         </a-popover>
 
-        <a-icon @click="!!request.trim().length && openForm(request)" type="heart" slot="suffix" v-else class="search-suffix"/>
+        <a-icon @click="!!request.trim().length && openForm({request, redact: false})" type="heart" slot="suffix" v-else
+                class="search-suffix"/>
 
       </a-input-search>
     </div>
     <div class="videos-wrapper" v-if="result.videos.length">
       <div class="videos-top">
         <div class="videos-info">
-          <span class="videos-info-request">Видео по запросу "{{ newRequest }}"</span><span class="videos-info-views">{{ result.totalResults }}</span>
+          <span class="videos-info-request">Видео по запросу "{{ newRequest }}"</span><span
+            class="videos-info-views">{{ result.totalResults }}</span>
         </div>
         <div>
           <a-radio-group :default-value="true" v-model="row" size="large">
             <a-radio-button :value="true">
-              <a-icon type="unordered-list" />
+              <a-icon type="unordered-list"/>
             </a-radio-button>
             <a-radio-button :value="false">
-              <a-icon type="appstore" />
+              <a-icon type="appstore"/>
             </a-radio-button>
           </a-radio-group>
         </div>
@@ -55,26 +59,21 @@
                 {{ video.channel }}
               </p>
               <p class="video-views">
-                {{ formViews(video.views) }}
+                {{ video.views }}
               </p>
             </div>
           </div>
         </div>
       </div>
     </div>
-    <add-favorite-form></add-favorite-form>
   </div>
 </template>
 
 <script>
 import { mapState, mapActions, mapGetters } from 'vuex';
-import AddFavoriteForm from '@/components/AddFavoriteForm';
 
 export default {
   name: "findVideo",
-  components: {
-    AddFavoriteForm
-  },
   data: () => ({
     request: '',
     row: true,
@@ -83,11 +82,11 @@ export default {
   }),
   computed: {
     ...mapState('videoStorage', [
-        'result'
+      'result'
     ]),
     ...mapGetters('videoStorage', [
-       'getRequest',
-        'getFavoritesArr'
+      'getRequest',
+      'getFavoritesArr'
     ]),
     newRequest: {
       get() {
@@ -101,23 +100,13 @@ export default {
   methods: {
     ...mapActions('videoStorage', [
       'getVideos',
-        'openForm'
+      'openForm'
     ]),
     onSearch() {
       if (!this.request.trim().length) return;
       this.getVideos({
         request: this.request
       });
-    },
-    formViews(views) {
-      // console.log(views)
-      // let out = '';
-      // const splitViews = views.split('');
-      // if (splitViews.length > 3) {
-      //   out = splitViews.splice(0, 3).join('');
-      // }
-      // console.log(out);
-      return views;
     }
   },
   mounted() {
@@ -141,7 +130,7 @@ export default {
     text-align: left;
 
     .search {
-      margin-top: 0 ;
+      margin-top: 0;
     }
   }
 
@@ -169,7 +158,8 @@ export default {
   }
 }
 
-.search-suffix-active {}
+.search-suffix-active {
+}
 
 .favorites-popover {
   max-width: 220px;

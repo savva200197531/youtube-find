@@ -4,17 +4,20 @@
     <a-layout-content>
       <router-view></router-view>
     </a-layout-content>
+    <add-favorite-form></add-favorite-form>
   </div>
 </template>
 
 <script>
 import HeaderComponent from '@/components/HeaderComponent';
 import { mapActions } from 'vuex';
+import AddFavoriteForm from '@/components/AddFavoriteForm';
 
 export default {
   name: "mainLayout",
   components: {
-    HeaderComponent
+    HeaderComponent,
+    AddFavoriteForm
   },
   methods: {
     ...mapActions('authStorage', [
@@ -25,8 +28,11 @@ export default {
     ]),
   },
   mounted() {
-    this.initUsersState();
-    this.initFavoritesState();
+    console.log(JSON.parse(localStorage.getItem('user')))
+    if (JSON.parse(localStorage.getItem('user'))) {
+      this.initUsersState();
+      this.initFavoritesState();
+    }
   }
 }
 </script>

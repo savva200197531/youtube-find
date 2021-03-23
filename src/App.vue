@@ -9,14 +9,23 @@ export default {
   name: 'App',
   components: {},
   computed: {},
-  methods: {},
-  mounted() {
-    if (!JSON.parse(localStorage.getItem('user')) && router.currentRoute.path !== '/auth') {
-      router.push('/auth');
+  methods: {
+    authCheck() {
+      if (!JSON.parse(localStorage.getItem('user')) && router.currentRoute.path !== '/auth') {
+        router.push('/auth');
+      }
     }
+  },
+  mounted() {
+    this.authCheck();
   },
   destroyed() {
     this.userOffline();
+  },
+  watch: {
+    '$route' () {
+      this.authCheck();
+    }
   }
 }
 </script>

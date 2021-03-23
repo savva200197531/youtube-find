@@ -1,5 +1,5 @@
 <template>
-  <div class="add-favorite-form-wrapper" v-if="showForm.show">
+  <div class="add-favorite-form-wrapper" v-if="showForm.show" @click="closeModal">
     <a-form
         id="components-form-demo-validate-other"
         :form="form"
@@ -10,7 +10,7 @@
 
       <a-form-item label="Запрос">
         <a-input
-            :read-only="!!showForm.request.trim().length"
+            :read-only="!showForm.redact"
             v-decorator="[
           'request',
           { initialValue: showForm.request, rules: rules.requestRules },
@@ -24,7 +24,7 @@
         <a-input
             v-decorator="[
           'name',
-          { initialValue: 'А4', rules: rules.nameRules },
+          { initialValue: getCurrentFavorite.name, rules: rules.nameRules },
         ]"
             placeholder="Укажите название"
         >
@@ -35,7 +35,7 @@
         <a-select
             v-decorator="[
           'order',
-          { initialValue: 'relevance' }
+          { initialValue: getCurrentFavorite.order || 'relevance' }
         ]">
           <a-select-option v-for="(select, idx) in selectValues" :value="select.value" :key="idx">
             {{ select.name }}
@@ -47,13 +47,13 @@
         <a-row>
           <a-col :span="18">
             <a-slider
-                v-decorator="['max', { initialValue: 12 }]"
-                v-model="sliderValue"
+                v-decorator="['max', { initialValue: getCurrentFavorite.max || 12 }]"
+                @change="handleSliderChange"
                 :min="1"
                 :max="50"/>
           </a-col>
           <a-col :span="4">
-            <a-input-number v-model="sliderValue" :min="1" :max="50" style="marginLeft: 16px"/>
+            <a-input-number v-decorator="['max', { initialValue: getCurrentFavorite.max || 12 }]"  @change="handleSliderChange" :min="1" :max="50" style="marginLeft: 16px"/>
           </a-col>
         </a-row>
       </a-form-item>
@@ -73,7 +73,7 @@
 </template>
 
 <script>
-import { mapActions, mapState } from 'vuex';
+import { mapActions, mapState, mapGetters } from 'vuex';
 
 export default {
   name: "addFavoriteForm",
@@ -121,6 +121,9 @@ export default {
     ]),
     ...mapState('authStorage', [
         'user'
+    ]),
+    ...mapGetters('videoStorage', [
+      'getCurrentFavorite'
     ])
   },
   beforeCreate() {
@@ -135,12 +138,26 @@ export default {
       e.preventDefault();
       this.form.validateFields((err, values) => {
         if (!err) {
-          this.submitFavoriteForm({ ...values, userId: this.user.id });
+          console.log(this.showForm)
+          this.submitFavoriteForm({ ...values, userId: this.user.id, favoriteId: this.getCurrentFavorite.id });
           this.closeForm();
         }
       });
     },
+    closeModal(event) {
+      if (event.target.classList.contains('add-favorite-form-wrapper')) {
+        this.closeForm();
+      }
+    },
+    handleSliderChange(value) {
+      this.form.setFieldsValue({
+        max: value
+      });
+    },
   },
+  mounted() {
+    this.sliderValue = this.getCurrentFavorite.max;
+  }
 }
 </script>
 
@@ -158,6 +175,8 @@ export default {
 }
 
 .add-favorite-form {
+  z-index: 11;
+  position: relative;
   background: white;
   box-shadow: 0 10px 50px rgba(19, 144, 229, 0.8);
   border-radius: 10px;
